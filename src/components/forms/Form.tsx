@@ -9,13 +9,17 @@ interface Config {
   type: string;
   value: string;
   required?: boolean;
+  link?: {
+    linkText: string;
+    linkUrl: string;
+  },
 
 }
 interface Props {
   config: Config[];
   isLoading: boolean;
   buttonText: string;
-  cancelRedirection: string;
+  cancelRedirection?: string;
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
   onSubmit: (event: FormEvent<HTMLFormElement>) => void;
 
@@ -26,14 +30,15 @@ interface Props {
 export default function Form({ config, isLoading, buttonText, cancelRedirection, onChange, onSubmit }: Props) {
   return (
     <form className="space-y-6" onSubmit={onSubmit}>
-      { config.map((input, index) => (
+      { config.map((input) => (
         <Input
-          key={index}
+          key={input.labelId}
           labelId={input.labelId}
           type={input.type}
           onChange={onChange}
           required={input.required}
           value={input.value}
+          link={input.link}
         >
           {input.labelText}
         </Input>
@@ -42,18 +47,21 @@ export default function Form({ config, isLoading, buttonText, cancelRedirection,
       <div className="flex gap-2">
         <button
           type="submit"
-          className="flex w-full justify-center rounded-md bg-sky-950 px-3 py-1.5 text-white shadow-sm hover:bg-sky-700"
+          className="flex w-full justify-center rounded-md bg-blue px-3 py-1.5 text-white shadow-sm hover:bg-blue-hover"
+          disabled={isLoading}
         >
           {isLoading ? <Spinner sm /> : buttonText}
         </button>
-        <button
-          type="button"
-          className="flex w-full justify-center rounded-md bg-white px-3 py-1.5 text-sky shadow-sm hover:bg-gray-200 ring-1 ring-inset ring-sky-950"
-        >
-          <Link href={cancelRedirection}>
-            Annuler
-          </Link>
-        </button>
+        {cancelRedirection && (
+          <button
+            type="button"
+            className="flex w-full justify-center rounded-md bg-white px-3 py-1.5 text-blue shadow-sm hover:bg-blue-hover hover:text-white hover:ring-0 ring-1 ring-inset ring-blue"
+          >
+            <Link href={cancelRedirection}>
+              Annuler
+            </Link>
+          </button>
+        )}
       </div>
     </form>
   )

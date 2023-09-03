@@ -1,3 +1,10 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: 'Accueil',
+  description: "Page d'accueil'"
+};
+
 export default function Home() {
   return (
     <>

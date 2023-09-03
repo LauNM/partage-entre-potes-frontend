@@ -1,4 +1,10 @@
 import { RegisterForm } from "@/components/forms";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: 'Création de compte',
+  description: "Page de création de compte"
+};
 
 export default function Register() {
 

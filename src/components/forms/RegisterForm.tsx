@@ -31,7 +31,7 @@ export default function RegisterForm() {
       required: true
     },
     {
-      labelText: 'Npm',
+      labelText: 'Nom',
       labelId: 'last_name',
       type: 'text',
       value: last_name,
