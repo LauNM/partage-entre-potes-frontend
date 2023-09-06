@@ -1,6 +1,5 @@
 'use client';
 
-import { useResetPasswordMutation } from "@/redux/features/authApiSlice"
 import { Form } from '@/components/forms';
 import { useResetPassword } from "@/hooks";
 

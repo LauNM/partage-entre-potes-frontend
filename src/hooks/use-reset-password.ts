@@ -1,9 +1,8 @@
-import {useRouter} from "next/navigation";
-import {useRegisterMutation, useResetPasswordMutation} from "@/redux/features/authApiSlice";
+import { useResetPasswordMutation} from "@/redux/features/authApiSlice";
 import {ChangeEvent, FormEvent, useState} from "react";
 import {toast} from "react-toastify";
 
-export default function useLogin() {
+export default function useResetPassword() {
   const [resetPassword, {isLoading}] = useResetPasswordMutation();
   const [email, setEmail] = useState('')
 

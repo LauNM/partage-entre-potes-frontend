@@ -1,5 +1,5 @@
 import {Metadata} from "next";
-import {LoginForm, ResetPasswordForm} from "@/components/forms";
+import {ResetPasswordForm} from "@/components/forms";
 import Link from "next/link";
 
 export const metadata: Metadata = {
@@ -25,8 +25,6 @@ export default function Page() {
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <ResetPasswordForm />
         </div>
-        // TODO : reprendre le lien reset password envoyé par le back
-
         <p className="mt-10 text-center text-sm text-blue">
           <Link href="/auth/login" className="leading-6 text-blue hover:text-blue-hover">
             Revenir à la page de connexion
