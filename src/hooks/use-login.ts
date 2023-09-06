@@ -1,9 +1,12 @@
-import {useRouter} from "next/navigation";
-import {useLoginMutation} from "@/redux/features/authApiSlice";
-import {ChangeEvent, FormEvent, useState} from "react";
-import {toast} from "react-toastify";
+import { useState, ChangeEvent, FormEvent } from 'react';
+import { useRouter } from 'next/navigation';
+import { useAppDispatch } from '@/redux/hooks';
+import { useLoginMutation } from '@/redux/features/authApiSlice';
+import { setAuth } from '@/redux/features/authSlice';
+import { toast } from 'react-toastify';
 
 export default function useLogin() {
+  const dispatch = useAppDispatch();
   const router = useRouter();
   const [login, {isLoading}] = useLoginMutation();
 
@@ -26,7 +29,10 @@ export default function useLogin() {
 
     login({email, password})
       .unwrap()
-      .then(() => {
+      .then((res) => {
+        const { access } = res;
+        localStorage.setItem("token", access)
+        dispatch(setAuth());
         toast.success('Authentification réussie');
         router.push('/my-network');
       })
