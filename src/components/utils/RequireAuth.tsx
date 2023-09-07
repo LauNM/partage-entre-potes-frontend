@@ -10,11 +10,12 @@ interface Props {
 
 export default function RequireAuth({ children }: Props) {
     const { isLoading, isAuthenticated } = useAppSelector(state => state.auth);
+    const test = useAppSelector(state => state)
 
     // TODO: mettre le token dans le state ? state.token
 
     if (!isAuthenticated) {
-        console.log('loading', isLoading, 'auth ', !isAuthenticated)
+        console.log('loading', isLoading, 'auth ', !isAuthenticated, 'state', test)
         redirect('/auth/login');
     }
 

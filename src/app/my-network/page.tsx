@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { useLoginMutation, useRetrieveUserQuery } from '@/redux/features/authApiSlice';
 
 export const metadata: Metadata = {
   title: 'Mon réseau',
@@ -6,6 +7,8 @@ export const metadata: Metadata = {
 };
 
 export default function MyNetwork() {
+  const { data, error, isLoading: isLoadingUser } = useRetrieveUserQuery();
+  //console.log(data)
 
 
   return (

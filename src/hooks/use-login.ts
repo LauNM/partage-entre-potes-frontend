@@ -31,8 +31,7 @@ export default function useLogin() {
       .unwrap()
       .then((res) => {
         const { access } = res;
-        localStorage.setItem("token", access)
-        dispatch(setAuth());
+        dispatch(setAuth({token: access}));
         toast.success('Authentification réussie');
         router.push('/my-network');
       })

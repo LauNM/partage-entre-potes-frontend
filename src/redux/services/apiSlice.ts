@@ -10,6 +10,14 @@ import { Mutex } from "async-mutex";
 const mutex = new Mutex();
 const baseQuery = fetchBaseQuery({
   baseUrl: `${process.env.NEXT_PUBLIC_HOST}/api`,
+  prepareHeaders: (headers, { getState }) => {
+    const token = getState().auth.userToken
+    if (token) {
+      // include token in req header
+      headers.set('Authorization', `Bearer ${token}`)
+      return headers
+    }
+  },
   credentials: 'include',
 })
 const baseQueryWithReauth: BaseQueryFn<
