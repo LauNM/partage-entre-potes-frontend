@@ -1,14 +1,14 @@
-import type { Metadata } from "next";
-import { useLoginMutation, useRetrieveUserQuery } from '@/redux/features/authApiSlice';
+'use client';
 
-export const metadata: Metadata = {
-  title: 'Mon réseau',
-  description: "Page de mon réseau"
-};
+import { useGetFriendProductQuery } from "@/redux/features/productApiSlice";
+import { useGetProfileQuery } from '@/redux/features/authApiSlice';
+
 
 export default function MyNetwork() {
-  const { data, error, isLoading: isLoadingUser } = useRetrieveUserQuery();
-  //console.log(data)
+ // const test = useGetProfileQuery(null);
+  const test = useGetFriendProductQuery(null);
+
+  console.log(test)
 
 
   return (

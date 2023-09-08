@@ -1,4 +1,5 @@
 import { apiSlice } from "../services/apiSlice";
+import {getTokenCookie} from "@/redux/services/cookieService";
 
 interface User {
   first_name: string;
@@ -7,15 +8,17 @@ interface User {
   surname: string;
 }
 
-interface UserCreateResponse {
-  success: boolean;
-  user: User;
-}
 
 const authApiSlice = apiSlice.injectEndpoints({
   endpoints: builder => ({
-    retrieveUser: builder.query<User, void>({
-      query: () => '/profile/'
+    getProfile: builder.query<User, void>({
+      query: () => ({
+        url: '/profile/',
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${getTokenCookie()}`,
+        },
+      }),
     }),
     login: builder.mutation({
       query: ({ email, password }) => ({
@@ -78,6 +81,7 @@ const authApiSlice = apiSlice.injectEndpoints({
 })
 
 export const {
+    useGetProfileQuery,
     useRetrieveUserQuery,
     useLoginMutation,
     useRegisterMutation,

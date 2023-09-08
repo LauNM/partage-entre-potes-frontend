@@ -6,8 +6,8 @@ interface Props {
 }
 
 export const metadata: Metadata = {
-  title: 'Mon réseau',
-  description: "Page de mon réseau"
+  title: 'Mes produits',
+  description: "Page de mes produits"
 };
 
 export default function Layout({ children }: Props) {
