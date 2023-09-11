@@ -1,5 +1,5 @@
 import { apiSlice } from "../services/apiSlice";
-import {getTokenCookie} from "@/redux/services/cookieService";
+import {getTokenCookie} from "@/services/cookieService";
 
 interface User {
   first_name: string;
@@ -82,7 +82,6 @@ const authApiSlice = apiSlice.injectEndpoints({
 
 export const {
     useGetProfileQuery,
-    useRetrieveUserQuery,
     useLoginMutation,
     useRegisterMutation,
     useVerifyMutation,

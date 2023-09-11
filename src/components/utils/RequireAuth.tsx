@@ -1,5 +1,5 @@
 'use client';
-import {hasToken} from "@/redux/services/cookieService";
+import {hasToken} from "@/services/cookieService";
 
 import { redirect } from 'next/navigation';
 import { useAppSelector } from '@/redux/hooks';

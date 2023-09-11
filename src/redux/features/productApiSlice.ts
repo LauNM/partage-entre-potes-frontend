@@ -1,5 +1,5 @@
 import { apiSlice } from "../services/apiSlice";
-import {getTokenCookie} from "@/redux/services/cookieService";
+import {getTokenCookie} from "@/services/cookieService";
 
 interface Category {
     id: string;
@@ -13,6 +13,7 @@ interface  Reservation {
     created_at: Date;
 }
 interface Product {
+    results: any;
     id: string;
     name: string;
     description: string;
@@ -28,7 +29,7 @@ const productApiSlice = apiSlice.injectEndpoints({
     endpoints: builder => ({
         getFriendProduct: builder.query<Product, void>({
             query: () => ({
-                url: '/friend_list/product/',
+                url: '/friend/product/',
                 method: 'GET',
                 headers: {
                     Authorization: `Bearer ${getTokenCookie()}`,

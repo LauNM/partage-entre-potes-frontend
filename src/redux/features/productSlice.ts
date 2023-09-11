@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 
 interface Category {
     id: string;
@@ -11,7 +11,7 @@ interface  Reservation {
     requester_surname: string;
     created_at: Date;
 }
-interface Product {
+export interface Product {
     id: string;
     name: string;
     description: string;
@@ -33,13 +33,14 @@ const initialState = {
     category: null,
     reservation: null,
     image: null,
-} as Product;
+};
 
 export const productSlice = createSlice({
     name: 'friend_product',
     initialState,
     reducers: {
         setFriendProduct: (state, action) => {
+            console.log(state, action)
             state.name = action.payload.name;
             state.id = action.payload.id;
             state.description = action.payload.description;

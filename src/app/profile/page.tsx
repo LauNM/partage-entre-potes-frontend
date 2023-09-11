@@ -5,7 +5,7 @@ import { useGetProfileQuery } from '@/redux/features/authApiSlice';
 
 
 export default function Profile() {
-    const result = useGetProfileQuery(null);
+    const result = useGetProfileQuery();
 
 
 

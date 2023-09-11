@@ -4,7 +4,7 @@ import { useAppDispatch } from '@/redux/hooks';
 import { useLoginMutation } from '@/redux/features/authApiSlice';
 import { setAuth } from '@/redux/features/authSlice';
 import { toast } from 'react-toastify';
-import {setTokenCookie} from "@/redux/services/cookieService";
+import {setTokenCookie} from "@/services/cookieService";
 
 export default function useLogin() {
   const dispatch = useAppDispatch();
@@ -34,7 +34,6 @@ export default function useLogin() {
         const { access } = res;
         dispatch(setAuth({token: access}));
         setTokenCookie(access);
-        toast.success('Authentification réussie');
 
         router.push('/my-network');
       })
