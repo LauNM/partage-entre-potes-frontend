@@ -1,12 +1,12 @@
 'use client';
-
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import { useGetFriendProductQuery } from "@/redux/features/productApiSlice";
 import Card from "@/components/product/Card";
 import { useGetProfileQuery } from '@/redux/features/authApiSlice';
-import {useEffect} from "react";
 import {useAppDispatch} from "@/redux/hooks";
-import {setUser, fetchUser} from "@/redux/features/userSlice";
+import {setUser} from "@/redux/features/userSlice";
 import {setFriendProduct} from "@/redux/features/productSlice";
+import {getUser} from "@/api/apiRequests";
 
 
 export default function MyNetwork() {
@@ -19,8 +19,19 @@ export default function MyNetwork() {
     isError,
   } = useGetFriendProductQuery();
 
-  const test = fetchUser();
-  console.log(test)
+  const fetchUser = useCallback(async () => {
+    try {
+      const { body } = await getUser();
+      dispatch(setUser(body))
+    } catch(e) {
+      console.log(e)
+    }
+  },[dispatch])
+
+  useEffect(() => {
+    fetchUser();
+  }, [fetchUser]);
+
 
   let result;
 

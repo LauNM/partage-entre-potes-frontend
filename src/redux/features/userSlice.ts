@@ -47,12 +47,6 @@ const initialState = {
     email: null,
     surname: null,
 }
-
-export const fetchUser = createAsyncThunk('user/fetch', async () => {
-    const response = await axios.get(`${process.env.NEXT_PUBLIC_HOST}/api/profile/`);
-    return response.data;
-})
-
 const userSlice = createSlice({
     name: 'user',
     initialState,
@@ -66,20 +60,6 @@ const userSlice = createSlice({
             state.surname = action.payload.surname;
         },
     },
-    extraReducers: (builder) => {
-        builder.addCase(fetchUser.pending, (state, action) => {
-            state.loading = true;
-        });
-        builder.addCase(fetchUser.fulfilled, (state, action) => {
-            state.loading = false;
-            state.user = action.payload.value;
-        });
-        builder.addCase(fetchUser.rejected, (state, action) => {
-            state.loading = false;
-            state.user = '';
-            state.error = action.error.message;
-        });
-    }
 })
 
 export const { setUser } = userSlice.actions;
