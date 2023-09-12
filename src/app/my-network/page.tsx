@@ -3,17 +3,24 @@
 import { useGetFriendProductQuery } from "@/redux/features/productApiSlice";
 import Card from "@/components/product/Card";
 import { useGetProfileQuery } from '@/redux/features/authApiSlice';
-import { ReactElement, JSXElementConstructor, ReactNode, ReactPortal, PromiseLikeOfReactNode } from "react";
+import {useEffect} from "react";
+import {useAppDispatch} from "@/redux/hooks";
+import {setUser, fetchUser} from "@/redux/features/userSlice";
+import {setFriendProduct} from "@/redux/features/productSlice";
 
 
 export default function MyNetwork() {
+  const dispatch = useAppDispatch();
+
   const {
     data,
     isLoading,
     isSuccess,
     isError,
-    error,
   } = useGetFriendProductQuery();
+
+  const test = fetchUser();
+  console.log(test)
 
   let result;
 
@@ -27,8 +34,8 @@ export default function MyNetwork() {
     )
   } else if (isSuccess) {
     const friendProducts = data.results
-    result = <div className="card-wrapper">
-      {friendProducts.map((item: object) => {
+    result = <div className="card-wrapper grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-2">
+      {friendProducts.map((item: any) => {
         return <Card key={item.id} product={item} />
       })}
     </div>
