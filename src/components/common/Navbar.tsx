@@ -20,7 +20,8 @@ export default function Navbar() {
         logout(undefined)
             .unwrap()
             .then(() => {
-                dispatch(setLogout());
+                // @ts-ignore
+              dispatch(setLogout());
             });
     };
 

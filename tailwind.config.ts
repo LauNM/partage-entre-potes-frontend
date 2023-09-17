@@ -3,6 +3,7 @@ import {undefined} from "zod";
 import plugin from "@tailwindcss/forms";
 
 const config: {
+  // @ts-ignore
   plugins: (plugin | ((options?: Partial<{ strategy: "base" | "class" }>) => { handler: () => void }))[];
   theme: {
     extend: { backgroundImage: { "gradient-conic": string; "gradient-radial": string } };

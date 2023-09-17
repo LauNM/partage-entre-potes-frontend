@@ -1,36 +1,43 @@
 import {store} from "@/redux/store";
 
-const axios = require('axios')
+import axios from 'axios';
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
 
-const initialState = {
-    loading: false,
-    user: {},
-    error: ''
+interface UserState {
+    loading: boolean;
+    user: {
+        id?: any;
+        date_joined?: any;
+        first_name?: string;
+        last_name?: string;
+        email?: string;
+        surname?: string;
+    },
 }
 
-export const fetchUser = createAsyncThunk('user/fetchUser', () => {
+const initialState = {
+    loading: true,
+    user: {},
+}
+
+export const fetchUser = createAsyncThunk('user/fetchUser', async () => {
     const token = store.getState().auth.userToken;
-    return axios
-        .get(`${process.env.NEXT_PUBLIC_HOST}/api/profile/`, {
-            headers: {
-                'Authorization': `Bearer ${ token }`,
-                'Content-Type': 'application/json'
-            }})
-        .then(response => response.data.results[0])
+    const response = await axios
+      .get(`${process.env.NEXT_PUBLIC_HOST}/api/profile/`, {
+          headers: {
+              'Authorization': `Bearer ${token}`,
+              'Content-Type': 'application/json'
+          }
+      });
+    return setUser(response.data.results[0]);
 })
 
-export const userSlice = createSlice({
+const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
         setUser:  (state, action) => {
-            state.id = action.payload.id;
-            state.date_joined = action.payload.date_joined;
-            state.first_name = action.payload.first_name;
-            state.last_name = action.payload.last_name;
-            state.email = action.payload.email;
-            state.surname = action.payload.surname;
+            state.user = action.payload
         },
     },
     extraReducers: (builder) => {
@@ -39,17 +46,14 @@ export const userSlice = createSlice({
         })
         builder.addCase(fetchUser.fulfilled, (state, action) => {
             state.loading = false
-            state.user = action.payload
-            state.error = ''
+            state.user = action.payload.payload
         })
         builder.addCase(fetchUser.rejected, (state, action) => {
             state.loading = false
-            state.user = []
-            state.error = action.error.message
+            state.user = {}
         })
     }
 })
 
 export const { setUser } = userSlice.actions;
-module.exports = userSlice.reducer
-module.exports.fetchUser = fetchUser
+export default userSlice.reducer

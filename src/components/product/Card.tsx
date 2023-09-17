@@ -1,6 +1,7 @@
-import { Tag } from '@/components/common'
-import { AiOutlineMenu } from "react-icons/ai";
 import {useSelector} from "react-redux";
+import {Tag} from "@/components/common";
+import {AiOutlineMenu} from "react-icons/ai";
+import Button from "@/components/common/Button";
 
 interface Props {
   product: {
@@ -17,24 +18,72 @@ interface Props {
       name: string;
     };
     image: string;
+    reservation: {
+      id: string;
+      requester_id: string;
+      requester_name: string;
+      created_at: any;
+    }
   }
 }
 
+const status = {
+  available: "Available",
+  booked: "Booked",
+  borrowed: "Borrowed"
+}
+
 export default function Card({ product }: Props) {
+  // @ts-ignore
   const user_connected_id = useSelector((state) => state.user.user.id);
-  let buttonText;
-/*  if (product.owner.id === user_connected_id && ) {
-    buttonText =
-  }*/
+  const isOwner = user_connected_id === product.owner.id;
+  let showButton = false;
+  let buttonText = '';
+  let disabled = true;
+
+  if(product.status === status.available
+    && product.owner.id !== user_connected_id) {
+    showButton = true;
+    disabled = false;
+    buttonText = "Je réserve"
+  }
+  if(product.status === status.booked) {
+    if (isOwner) {
+      showButton = true;
+      disabled = false;
+      buttonText = "Voir la demande de réservation"
+    }
+    if (user_connected_id === product.reservation.requester_id) {
+      showButton = true;
+      disabled = false;
+      buttonText = "Annuler ma réservation"
+    }
+  }
+  if(product.status === status.borrowed) {
+    if (isOwner) {
+      showButton = true;
+      disabled = false;
+      buttonText = "Je l'ai récupéré"
+    }
+    if (user_connected_id === product.reservation.requester_id) {
+      showButton = true;
+      disabled = false;
+      buttonText = "Je l'ai rendu"
+    }
+  }
 
   return (
-    <div className="product-card rounded-lg bg-grey-light shadow-lg">
+    <div className="product-card rounded-lg bg-grey-light shadow-lg relative">
       <div className="card-content bg-cover bg-center rounded-t-lg h-36" style={{backgroundImage: `url(${product.image})`}}>
         <div style={{background: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4))'}} className="rounded-t-lg p-2 h-36 flex flex-col justify-between">
-          <div className="content-header flex justify-between text-white">
-            <Tag status={product.status} />
-            <span className="title text-xl font-semibold">{product.name}</span>
-            <span className="burger-menu"><AiOutlineMenu /></span>
+          <div className="text-white">
+            <div className="content-header flex justify-between">
+              <Tag status={product.status} />
+              { isOwner ? <span className="burger-menu"><AiOutlineMenu /></span> : null }
+            </div>
+            <div className="flex justify-center pt-1">
+              <span className="title text-xl font-semibold">{product.name}</span>
+            </div>
           </div>
           <div className="content-footer text-white">
             <p><span className="font-semibold">Catégorie :</span>  {product.category.name}</p>
@@ -42,11 +91,16 @@ export default function Card({ product }: Props) {
           </div>
         </div>
       </div>
-
       <div className="card-footer p-2">
         <p>{product.description}</p>
-        <button className="card-button">Annuler ma réservation</button>
+        {showButton ?
+          <Button text={buttonText} />
+          : null }
       </div>
+      {disabled ? <div className="rounded-lg absolute top-0" style={{
+        background: 'linear-gradient(rgba(217, 217, 217, 0.6), rgba(217, 217, 217, 0.6))',
+        height: '100%',
+        width: '100%',
+      }} /> : null}
     </div>
-  )
-}
+  )}

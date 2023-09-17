@@ -1,8 +1,14 @@
 
 interface Props {
-    color: string;
+    background?: string;
+    color?: string;
     text: string;
 }
-export default function Button({ color, text }: Props) {
-    return <button className="bg-buttonBackground text-button">{text}</button>
+
+export default function Button({ background='red', color='red-dark', text }: Props) {
+    const backgroundColor = `bg-${background}`;
+    const textColor = `text-${color}`;
+    // TODO default value not working
+    console.log(background)
+    return <button className={`rounded-lg bg-${background} text-${color}`}>{text}</button>
 }

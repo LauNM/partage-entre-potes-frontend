@@ -1,32 +1,36 @@
 import {store} from "@/redux/store";
 
-const axios = require('axios')
+import axios from 'axios';
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
-import {useSelector} from "react-redux";
 
-const initialState = {
-    loading: false,
-    friend_product: [],
-    error: ''
+interface FriendProduct {
+    loading: boolean;
+    friend_product: any[],
 }
 
-export const fetchFriendProduct = createAsyncThunk('friend/fetchProduct', () => {
+const initialState = {
+    loading: true,
+    friend_product: [],
+}
+
+export const fetchFriendProduct = createAsyncThunk('friend/fetchProduct', async () => {
     const token = store.getState().auth.userToken;
-    return axios
-        .get(`${process.env.NEXT_PUBLIC_HOST}/api/friend/product/`, {
-            headers: {
-                'Authorization': `Bearer ${ token }`,
-                'Content-Type': 'application/json'
-            }})
-        .then(response => response.data.results)
+    const response = await axios
+      .get(`${process.env.NEXT_PUBLIC_HOST}/api/friend/product/`, {
+          headers: {
+              'Authorization': `Bearer ${token}`,
+              'Content-Type': 'application/json'
+          }
+      });
+    return setFriendProduct(response.data.results);
 
 })
-export const productSlice = createSlice({
+const productSlice = createSlice({
     name: 'friend_product',
     initialState,
     reducers: {
         setFriendProduct: (state, action) => {
-            state.friend_product = action.payload.data;
+            state.friend_product = action.payload;
         }
     },
     extraReducers: (builder) => {
@@ -35,18 +39,15 @@ export const productSlice = createSlice({
         })
         builder.addCase(fetchFriendProduct.fulfilled, (state, action) => {
             state.loading = false
-            state.friend_product = action.payload
-            state.error = ''
+            state.friend_product = action.payload.payload
         })
         builder.addCase(fetchFriendProduct.rejected, (state, action) => {
             state.loading = false
-            state.friend_roduct = []
-            state.error = action.error.message
+            state.friend_product = []
         })
     }
 })
 
 export const { setFriendProduct } = productSlice.actions;
 
-module.exports = productSlice.reducer
-module.exports.fetchFriendProduct = fetchFriendProduct
+export default productSlice.reducer
