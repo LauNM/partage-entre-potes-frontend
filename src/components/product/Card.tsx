@@ -21,9 +21,11 @@ interface Props {
 }
 
 export default function Card({ product }: Props) {
-
+  const user_connected_id = useSelector((state) => state.user.user.id);
   let buttonText;
-  //if (product.owner === )
+/*  if (product.owner.id === user_connected_id && ) {
+    buttonText =
+  }*/
 
   return (
     <div className="product-card rounded-lg bg-grey-light shadow-lg">
