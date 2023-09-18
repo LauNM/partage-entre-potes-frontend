@@ -1,14 +1,24 @@
+import {MouseEventHandler} from "react";
 
 interface Props {
-    background?: string;
-    color?: string;
+    type?: string;
     text: string;
+    onClick?: MouseEventHandler;
 }
 
-export default function Button({ background='red', color='red-dark', text }: Props) {
-    const backgroundColor = `bg-${background}`;
-    const textColor = `text-${color}`;
-    // TODO default value not working
-    console.log(background)
-    return <button className={`rounded-lg bg-${background} text-${color}`}>{text}</button>
+const style: object = {
+    default: {
+        background: 'bg-button-light',
+        color: 'text-button'
+    },
+    primary: {
+        background: 'bg-primary',
+        color: 'text-primary-light'
+    }
+}
+
+export default function Button({ type, text, onClick }: Props) {
+    // @ts-ignore
+    const {background, color } = style[type || 'default'];
+    return <button onClick={onClick} className={`rounded-lg px-4 py-1 ${background} ${color}`}>{text}</button>
 }
