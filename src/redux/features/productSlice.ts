@@ -10,7 +10,7 @@ interface FriendProduct {
 
 const initialState = {
     loading: true,
-    friend_product: [],
+    friend_product: null,
 }
 
 export const fetchFriendProduct = createAsyncThunk('friend/fetchProduct', async () => {
@@ -43,7 +43,7 @@ const productSlice = createSlice({
         })
         builder.addCase(fetchFriendProduct.rejected, (state, action) => {
             state.loading = false
-            state.friend_product = []
+            state.friend_product = null
         })
     }
 })

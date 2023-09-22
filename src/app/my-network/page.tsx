@@ -9,17 +9,16 @@ import {useSelector} from "react-redux";
 
 export default function MyNetwork() {
   // @ts-ignore
-  const user = useSelector((state) => state.user)
-  // @ts-ignore
   const friendProduct = useSelector((state) => state.friendProduct)
   const dispatch = useAppDispatch();
 
 
   useEffect(() => {
-    dispatch(fetchUser())
-    dispatch(fetchFriendProduct())
-
-  }, [dispatch]);
+    if(friendProduct.friend_product === null) {
+      dispatch(fetchUser())
+      dispatch(fetchFriendProduct())
+    }
+  }, [dispatch, friendProduct.friend_product]);
 
   if(friendProduct.loading) {
     return (<div><p>Loading...</p></div>)
