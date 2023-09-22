@@ -2,6 +2,8 @@ import {useSelector} from "react-redux";
 import {Tag} from "@/components/common";
 import {AiOutlineMenu} from "react-icons/ai";
 import Button from "@/components/common/Button";
+import {useEffect, useState} from "react";
+import {boolean} from "zod";
 
 interface Props {
   product: {
@@ -37,51 +39,54 @@ export default function Card({ product }: Props) {
   // @ts-ignore
   const user_connected_id = useSelector((state) => state.user.user.id);
   const isOwner = user_connected_id === product.owner.id;
-  let showButton = false;
-  let buttonText = '';
-  let disabled = true;
-  let popupText = '';
+  let [showButton, setShowButton] = useState(false);
+  let [buttonText, setButtonText] = useState('');
+  let [disabled, setDisabled] = useState(true);
+  let [popupText, setPopupText] = useState('');
 
   const action = (text: string) => {
     console.log(text)
   }
 
-  if(product.status === status.available
-    && product.owner.id !== user_connected_id) {
-    showButton = true;
-    disabled = false;
-    buttonText = "Je réserve";
-    popupText = 'réserver le produit';
+  const setButtonActive = () => {
+    setShowButton(true);
+    setDisabled(false);
+  }
 
-  }
-  if(product.status === status.booked) {
-    if (isOwner) {
-      showButton = true;
-      disabled = false;
-      buttonText = "Voir la demande de réservation";
-      popupText = 'produit réservé par :';
+  useEffect(() => {
+    if(product.status === status.available
+      && product.owner.id !== user_connected_id) {
+      setButtonActive();
+      setButtonText("Je réserve");
+      setPopupText("Réserver le produit");
+
     }
-    if (user_connected_id === product.reservation.requester_id) {
-      showButton = true;
-      disabled = false;
-      buttonText = "Annuler ma réservation";
-      popupText = 'annuler votre réservation ?';
+    if(product.status === status.booked) {
+      if (isOwner) {
+        setButtonActive();
+        setButtonText("Voir la demande de réservation");
+        setPopupText("produit réservé par :");
+      }
+      if (user_connected_id === product.reservation.requester_id) {
+        setButtonActive();
+        setButtonText("Annuler ma réservation");
+        setPopupText("annuler votre réservation ?");
+      }
     }
-  }
-  if(product.status === status.borrowed) {
-    if (isOwner) {
-      showButton = true;
-      disabled = false;
-      buttonText = "Je l'ai récupéré";
-      popupText = 'confirmer l\'avoir récupéré';
+    if(product.status === status.borrowed) {
+      if (isOwner) {
+        setButtonActive();
+        setButtonText("Je l'ai récupéré");
+        setPopupText("confirmer l\'avoir récupéré");
+      }
+      if (user_connected_id === product.reservation.requester_id) {
+        setButtonActive();
+        setButtonText("Je l'ai rendu");
+        setPopupText("confirmer avoir rendu le produit");
+      }
     }
-    if (user_connected_id === product.reservation.requester_id) {
-      showButton = true;
-      disabled = false;
-      buttonText = "Je l'ai rendu";
-      popupText = 'confirmer avoir rendu le produit';
-    }
-  }
+  }, [product, user_connected_id, isOwner])
+
 
   return (
     <div className="product-card rounded-lg bg-grey-light text-base shadow-lg relative">
