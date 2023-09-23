@@ -47,31 +47,31 @@ export default function productCard(product: Product, userConnectedId: string) {
     && product.owner.id !== userConnectedId) {
     setButtonActive();
     buttonText = "Je réserve";
-    popupText = "Réserver le produit";
+    popupText = "Vous êtes sur le point de réserver cet article.";
 
   }
   if (product.status === status.booked) {
     if (isOwner) {
       setButtonActive();
       buttonText = "Voir la demande de réservation";
-      popupText = "produit réservé par :";
+      popupText = `${product.reservation.requester_name} vous a envoyé une demande de réservation pour votre ‘${product.name}’ le ${product.reservation.created_at}`;
     }
     if (userConnectedId === product.reservation.requester_id) {
       setButtonActive();
       buttonText = "Annuler ma réservation";
-      popupText = "annuler votre réservation ?";
+      popupText = "Etes vous sûr de vouloir annuler votre demande de réservation ?";
     }
   }
   if (product.status === status.borrowed) {
     if (isOwner) {
       setButtonActive();
       buttonText = "Je l'ai récupéré";
-      popupText = "confirmer l\'avoir récupéré";
+      popupText = "Je confirme avoir récupéré mon produit.";
     }
     if (userConnectedId === product.reservation.requester_id) {
       setButtonActive();
       buttonText = "Je l'ai rendu";
-      popupText = "confirmer avoir rendu le produit";
+      popupText = `Je confirme avoir rendu le produit à ${product.owner.surname}.`;
     }
   }
 

@@ -1,11 +1,15 @@
 'use client';
-import React, {useEffect, useState} from "react";
+import React, {Fragment, useRef, useEffect, useState} from "react";
 import Card from "@/components/product/Card";
 import {useAppDispatch} from "@/redux/hooks";
 import {fetchUser} from '@/redux/features/userSlice'
 import {fetchFriendProduct} from '@/redux/features/productSlice'
 import {useSelector} from "react-redux";
 import productCard from "@/services/productCard";
+import {TfiClose} from 'react-icons/tfi';
+
+import { Dialog, Transition } from '@headlessui/react'
+import Modal from "@/components/product/Modal";
 
 
 export default function MyNetwork() {
@@ -16,6 +20,7 @@ export default function MyNetwork() {
   const user_connected_id = useSelector((state) => state.user.user.id);
   let [openModal, setOpenModal] = useState(false);
   let [modalText, setModalText] = useState("");
+
 
   const action = (text: string) => {
    setOpenModal(true);
@@ -45,7 +50,8 @@ export default function MyNetwork() {
         })}
       </div>
       {openModal ?
-      <div>{modalText}</div> : null}
+        <Modal openModal={openModal} setOpenModal={() => setOpenModal(false)} modalText={modalText} />
+        : null}
     </>
   )
 }
