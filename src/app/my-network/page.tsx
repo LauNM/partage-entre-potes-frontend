@@ -1,14 +1,11 @@
 'use client';
-import React, {Fragment, useRef, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import Card from "@/components/product/Card";
 import {useAppDispatch} from "@/redux/hooks";
 import {fetchUser} from '@/redux/features/userSlice'
 import {fetchFriendProduct} from '@/redux/features/productSlice'
 import {useSelector} from "react-redux";
 import productCard from "@/services/productCard";
-import {TfiClose} from 'react-icons/tfi';
-
-import { Dialog, Transition } from '@headlessui/react'
 import Modal from "@/components/product/Modal";
 
 

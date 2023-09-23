@@ -1,4 +1,3 @@
-import {useSelector} from "react-redux";
 import {Tag} from "@/components/common";
 import {AiOutlineMenu} from "react-icons/ai";
 import Button from "@/components/common/Button";
