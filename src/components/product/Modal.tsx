@@ -39,7 +39,7 @@ export default function Modal ({openModal, setOpenModal, modalText}: Props) {
               <Dialog.Panel className="relative h-72 w-96 max-w-[95%] transform flex flex-col justify-around overflow-hidden rounded-lg bg-white shadow-xl transition-all">
                 <button onClick={setOpenModal}>
                   <TfiClose
-                    class="absolute top-3 right-3 text-blue"
+                    className="absolute top-3 right-3 text-blue"
                   />
                 </button>
                 <div className="bg-white p-4 text-center">
@@ -59,7 +59,7 @@ export default function Modal ({openModal, setOpenModal, modalText}: Props) {
                   <button
                     type="button"
                     className="rounded-md bg-primary px-3 py-2 text-base font-semibold text-white hover:bg-primary-light hover:text-primary min-w-[25%]"
-                    onClick={setOpenModal}
+                    onClick={() => setOpenModal('validate')}
                   >
                     Valider
                   </button>

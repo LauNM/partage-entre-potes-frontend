@@ -29,6 +29,7 @@ interface Props {
     popupText: string;
     disabled: boolean;
     isOwner: boolean;
+    modalAction: string;
   },
   action: any;
 }
@@ -59,7 +60,7 @@ export default function Card({product, action}: Props) {
         <p>{product.description}</p>
         <div className="flex justify-center mt-4">
           {product.showButton ?
-            <Button text={product.buttonText} onClick={() => {action(product.popupText)}} />
+            <Button text={product.buttonText} onClick={() => {action(product)}} />
             : null }
         </div>
       </div>

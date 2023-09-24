@@ -35,10 +35,61 @@ const productApiSlice = apiSlice.injectEndpoints({
                     Authorization: `Bearer ${getTokenCookie()}`,
                 },
             })
+        }),
+        makeProductReservation: builder.mutation({
+            query: ({ product, requester }) => ({
+                url: '/reservation/',
+                method: 'POST',
+                headers: {
+                    Authorization: `Bearer ${getTokenCookie()}`,
+                },
+                body: { product, requester }
+            })
+        }),
+        cancelProductReservation: builder.mutation({
+            query: ({ id }) => ({
+                url: `/reservation/${id}/cancel/`,
+                method: 'POST',
+                headers: {
+                    Authorization: `Bearer ${getTokenCookie()}`,
+                }
+            })
+        }),
+        acceptProductReservation: builder.mutation({
+            query: ({ id }) => ({
+                url: `/reservation/${id}/accept/`,
+                method: 'POST',
+                headers: {
+                    Authorization: `Bearer ${getTokenCookie()}`,
+                }
+            })
+        }),
+        declineProductReservation: builder.mutation({
+            query: ({ id }) => ({
+                url: `/reservation/${id}/decline/`,
+                method: 'POST',
+                headers: {
+                    Authorization: `Bearer ${getTokenCookie()}`,
+                }
+            })
+        }),
+        returnProductReservation: builder.mutation({
+            query: ({ id }) => ({
+                url: `/reservation/${id}/return_product/`,
+                method: 'POST',
+                headers: {
+                    Authorization: `Bearer ${getTokenCookie()}`,
+                }
+            })
         })
     })
 })
 
 export const {
     useGetFriendProductQuery,
+    useMakeProductReservationMutation,
+    useCancelProductReservationMutation,
+    useAcceptProductReservationMutation,
+    useDeclineProductReservationMutation,
+    useReturnProductReservationMutation,
 } = productApiSlice;
