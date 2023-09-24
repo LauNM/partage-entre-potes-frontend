@@ -11,7 +11,7 @@ interface User {
 
 const authApiSlice = apiSlice.injectEndpoints({
   endpoints: builder => ({
-    getProfile: builder.query<User, void>({
+   /* getProfile: builder.query<User, void>({
       query: () => ({
         url: '/profile/',
         method: 'GET',
@@ -19,7 +19,7 @@ const authApiSlice = apiSlice.injectEndpoints({
           Authorization: `Bearer ${getTokenCookie()}`,
         },
       }),
-    }),
+    }),*/
     login: builder.mutation({
       query: ({ email, password }) => ({
         url: '/token/',
@@ -81,7 +81,6 @@ const authApiSlice = apiSlice.injectEndpoints({
 })
 
 export const {
-    useGetProfileQuery,
     useLoginMutation,
     useRegisterMutation,
     useVerifyMutation,

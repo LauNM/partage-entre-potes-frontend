@@ -32,10 +32,12 @@ const baseQueryWithReauth: BaseQueryFn<
           extraOptions
         );
         if (refreshResult.data) {
+          // @ts-ignore
           api.dispatch(setAuth())
           // retry the initial query
           result = await baseQuery(args, api, extraOptions)
         } else {
+          // @ts-ignore
           api.dispatch(logout())
         }
       } finally {

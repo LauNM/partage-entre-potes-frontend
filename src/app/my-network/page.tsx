@@ -1,60 +1,54 @@
 'use client';
-import React, { useEffect, useRef, useState, useCallback } from "react";
-import { useGetFriendProductQuery } from "@/redux/features/productApiSlice";
+import React, {useEffect, useState} from "react";
 import Card from "@/components/product/Card";
-import { useGetProfileQuery } from '@/redux/features/authApiSlice';
 import {useAppDispatch} from "@/redux/hooks";
-import {setUser} from "@/redux/features/userSlice";
-import {setFriendProduct} from "@/redux/features/productSlice";
-import {getUser} from "@/api/apiRequests";
+import {fetchUser} from '@/redux/features/userSlice'
+import {fetchFriendProduct} from '@/redux/features/productSlice'
+import {useSelector} from "react-redux";
+import productCard from "@/services/productCard";
+import Modal from "@/components/product/Modal";
 
 
 export default function MyNetwork() {
+  // @ts-ignore
+  const friendProduct = useSelector((state) => state.friendProduct)
   const dispatch = useAppDispatch();
+  // @ts-ignore
+  const user_connected_id = useSelector((state) => state.user.user.id);
+  let [openModal, setOpenModal] = useState(false);
+  let [modalText, setModalText] = useState("");
 
-  const {
-    data,
-    isLoading,
-    isSuccess,
-    isError,
-  } = useGetFriendProductQuery();
 
-  const fetchUser = useCallback(async () => {
-    try {
-      const { body } = await getUser();
-      dispatch(setUser(body))
-    } catch(e) {
-      console.log(e)
-    }
-  },[dispatch])
-
+  const action = (text: string) => {
+   setOpenModal(true);
+   setModalText(text);
+  }
   useEffect(() => {
-    fetchUser();
-  }, [fetchUser]);
 
+    if(friendProduct.friend_product === null) {
+      dispatch(fetchUser())
+      dispatch(fetchFriendProduct())
+    }
+  }, [dispatch, friendProduct.friend_product]);
 
-  let result;
-
-  if (isLoading) {
-    result = (
-      <div className="d-flex justify-content-center">
-        <div className="spinner-border" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </div>
-      </div>
-    )
-  } else if (isSuccess) {
-    const friendProducts = data.results
-    result = <div className="card-wrapper grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-2">
-      {friendProducts.map((item: any) => {
-        return <Card key={item.id} product={item} />
-      })}
-    </div>
-  } else if (isError) {
-    result = <div className="alert alert-danger" role="alert">
-     Une erreur est survenue
-    </div>
+  if(friendProduct.loading) {
+    return (<div><p>Loading...</p></div>)
+  }
+  if(!friendProduct.loading && !friendProduct.friend_product.length) {
+    return (<div><p>Pas de résultat</p></div>)
   }
 
-  return <div>{ result }</div>
+  return (
+    <>
+      <div className="card-wrapper grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-2">
+        {friendProduct.friend_product.map((item: any) => {
+          const product = productCard(item, user_connected_id);
+          return <Card key={item.id} product={product} action={action}/>
+        })}
+      </div>
+      {openModal ?
+        <Modal openModal={openModal} setOpenModal={() => setOpenModal(false)} modalText={modalText} />
+        : null}
+    </>
+  )
 }

@@ -3,6 +3,7 @@ import {undefined} from "zod";
 import plugin from "@tailwindcss/forms";
 
 const config: {
+  // @ts-ignore
   plugins: (plugin | ((options?: Partial<{ strategy: "base" | "class" }>) => { handler: () => void }))[];
   theme: {
     extend: { backgroundImage: { "gradient-conic": string; "gradient-radial": string } };
@@ -14,8 +15,7 @@ const config: {
       blue: { hover: string; light: string; DEFAULT: string };
       primary: { light: string; dark: string; DEFAULT: string };
       grey: { light: string; DEFAULT: string };
-      button: { DEFAULT: string };
-      buttonBackground: { DEFAULT: string };
+      button: { light: string; DEFAULT: string };
     }
   };
   content: string[]
@@ -65,11 +65,9 @@ const config: {
         DEFAULT: '#D8D8D8'
       },
       button: {
-        DEFAULT: '#B2C2C9'
-      },
-      buttonBackground: {
+        light: '#B2C2C9',
         DEFAULT: '#00344D'
-      }
+      },
     }
   },
   plugins: [

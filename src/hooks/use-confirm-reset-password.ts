@@ -3,7 +3,7 @@ import {ChangeEvent, FormEvent, useState} from "react";
 import {toast} from "react-toastify";
 import {useRouter} from "next/navigation";
 
-export default function useConfirmResetPassword(token) {
+export default function useConfirmResetPassword(token: string) {
     const router = useRouter();
     const [confirmResetPassword, {isLoading}] = useConfirmResetPasswordMutation();
     const [password, setPassword] = useState('')

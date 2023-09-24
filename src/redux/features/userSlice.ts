@@ -1,66 +1,59 @@
-/*
-import {createSlice} from "@reduxjs/toolkit";
+import {store} from "@/redux/store";
+
+import axios from 'axios';
+import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
 
 interface UserState {
-    id: string,
-    date_joined: Date,
-    first_name: string,
-    last_name: string,
-    email: string,
-    surname: string,
+    loading: boolean;
+    user: {
+        id?: any;
+        date_joined?: any;
+        first_name?: string;
+        last_name?: string;
+        email?: string;
+        surname?: string;
+    },
 }
+
 const initialState = {
-    id: null,
-    date_joined: null,
-    first_name: null,
-    last_name: null,
-    email: null,
-    surname: null,
-} as UserState;
+    loading: true,
+    user: {},
+}
+
+export const fetchUser = createAsyncThunk('user/fetchUser', async () => {
+    const token = store.getState().auth.userToken;
+    const response = await axios
+      .get(`${process.env.NEXT_PUBLIC_HOST}/api/profile/`, {
+          headers: {
+              'Authorization': `Bearer ${token}`,
+              'Content-Type': 'application/json'
+          }
+      });
+    return setUser(response.data.results[0]);
+})
 
 const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
         setUser:  (state, action) => {
-            state.id = action.payload.id;
-            state.date_joined = action.payload.date_joined;
-            state.first_name = action.payload.first_name;
-            state.last_name = action.payload.last_name;
-            state.email = action.payload.email;
-            state.surname = action.payload.surname;
+            state.user = action.payload
         },
+    },
+    extraReducers: (builder) => {
+        builder.addCase(fetchUser.pending, (state) => {
+            state.loading = true
+        })
+        builder.addCase(fetchUser.fulfilled, (state, action) => {
+            state.loading = false
+            state.user = action.payload.payload
+        })
+        builder.addCase(fetchUser.rejected, (state, action) => {
+            state.loading = false
+            state.user = {}
+        })
     }
 })
 
 export const { setUser } = userSlice.actions;
-export default userSlice.reducer;*/
-
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
-
-const initialState = {
-    id: null,
-    date_joined: null,
-    first_name: null,
-    last_name: null,
-    email: null,
-    surname: null,
-}
-const userSlice = createSlice({
-    name: 'user',
-    initialState,
-    reducers: {
-        setUser:  (state, action) => {
-            state.id = action.payload.id;
-            state.date_joined = action.payload.date_joined;
-            state.first_name = action.payload.first_name;
-            state.last_name = action.payload.last_name;
-            state.email = action.payload.email;
-            state.surname = action.payload.surname;
-        },
-    },
-})
-
-export const { setUser } = userSlice.actions;
-export default userSlice.reducer;
+export default userSlice.reducer
