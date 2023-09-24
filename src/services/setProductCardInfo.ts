@@ -17,7 +17,7 @@ interface Product {
     requester_id: string;
     requester_name: string;
     created_at: any;
-  }
+  },
 }
 
 const status = {
@@ -26,13 +26,14 @@ const status = {
   borrowed: "Borrowed"
 }
 
-export default function productCard(product: Product, userConnectedId: string) {
+export default function setProductCardInfo(product: Product, userConnectedId: string) {
 
   const isOwner = userConnectedId === product.owner.id;
   let showButton = false;
   let buttonText = '';
   let disabled = true;
   let popupText = '';
+  let modalAction = '';
 
 
   const setButtonActive = () => {
@@ -45,18 +46,19 @@ export default function productCard(product: Product, userConnectedId: string) {
     setButtonActive();
     buttonText = "Je réserve";
     popupText = "Vous êtes sur le point de réserver cet article.";
-
+    modalAction = "make-request";
   }
   if (product.status === status.booked) {
     if (isOwner) {
       setButtonActive();
       buttonText = "Voir la demande de réservation";
       popupText = `${product.reservation.requester_name} vous a envoyé une demande de réservation pour votre ‘${product.name}’ le ${product.reservation.created_at}`;
-    }
+      modalAction = "owner-request";}
     if (userConnectedId === product.reservation.requester_id) {
       setButtonActive();
       buttonText = "Annuler ma réservation";
       popupText = "Etes vous sûr de vouloir annuler votre demande de réservation ?";
+      modalAction = "cancel-request";
     }
   }
   if (product.status === status.borrowed) {
@@ -64,11 +66,13 @@ export default function productCard(product: Product, userConnectedId: string) {
       setButtonActive();
       buttonText = "Je l'ai récupéré";
       popupText = "Je confirme avoir récupéré mon produit.";
+      modalAction = "return-request";
     }
     if (userConnectedId === product.reservation.requester_id) {
       setButtonActive();
       buttonText = "Je l'ai rendu";
       popupText = `Je confirme avoir rendu le produit à ${product.owner.surname}.`;
+      modalAction = "return-request";
     }
   }
 
@@ -78,7 +82,8 @@ export default function productCard(product: Product, userConnectedId: string) {
     showButton,
     popupText,
     disabled,
-    isOwner
+    isOwner,
+    modalAction,
   }
 
 };

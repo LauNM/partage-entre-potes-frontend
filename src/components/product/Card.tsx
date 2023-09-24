@@ -39,7 +39,7 @@ export default function Card({product, action}: Props) {
     <div className="product-card rounded-lg bg-grey-light text-base shadow-lg relative">
       <div className="card-content relative bg-cover bg-center rounded-t-lg h-36">
         {product.image ? <Image src={product.image} alt={product.name} fill={true} objectFit={"cover"} className={"rounded-t-lg"} /> : null}
-        <div style={{background: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4))'}} className="relative rounded-t-lg z-50 p-2 h-36 flex flex-col justify-between">
+        <div style={{background: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4))'}} className="relative rounded-t-lg z-10 p-2 h-36 flex flex-col justify-between">
           <div className="text-white">
             <div className="content-header flex justify-between">
               <Tag status={product.status} />
@@ -59,7 +59,7 @@ export default function Card({product, action}: Props) {
         <p>{product.description}</p>
         <div className="flex justify-center mt-4">
           {product.showButton ?
-            <Button text={product.buttonText} onClick={() => {action(product.popupText)}} />
+            <Button text={product.buttonText} onClick={() => {action(product)}} />
             : null }
         </div>
       </div>

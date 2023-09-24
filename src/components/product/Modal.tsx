@@ -4,15 +4,15 @@ import {TfiClose} from "react-icons/tfi";
 
 interface Props {
   openModal: boolean;
-  setOpenModal: any;
+  click: any;
   modalText: string;
 }
-export default function Modal ({openModal, setOpenModal, modalText}: Props) {
+export default function Modal ({openModal, click, modalText}: Props) {
   const cancelButtonRef = useRef(null)
 
   return (
     <Transition.Root show={openModal} as={Fragment}>
-      <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={setOpenModal}>
+      <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={click}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
@@ -37,9 +37,9 @@ export default function Modal ({openModal, setOpenModal, modalText}: Props) {
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0"
             >
               <Dialog.Panel className="relative h-72 w-96 max-w-[95%] transform flex flex-col justify-around overflow-hidden rounded-lg bg-white shadow-xl transition-all">
-                <button onClick={setOpenModal}>
+                <button onClick={click}>
                   <TfiClose
-                    class="absolute top-3 right-3 text-blue"
+                    className="absolute top-3 right-3 text-blue"
                   />
                 </button>
                 <div className="bg-white p-4 text-center">
@@ -51,7 +51,7 @@ export default function Modal ({openModal, setOpenModal, modalText}: Props) {
                   <button
                     type="button"
                     className="rounded-md bg-white px-3 py-2 text-base font-semibold text-primary ring-1 ring-inset ring-primary hover:bg-primary-light hover:ring-primary-light min-w-[25%]"
-                    onClick={setOpenModal}
+                    onClick={click}
                     ref={cancelButtonRef}
                   >
                     Annuler
@@ -59,7 +59,7 @@ export default function Modal ({openModal, setOpenModal, modalText}: Props) {
                   <button
                     type="button"
                     className="rounded-md bg-primary px-3 py-2 text-base font-semibold text-white hover:bg-primary-light hover:text-primary min-w-[25%]"
-                    onClick={setOpenModal}
+                    onClick={() => click("validate")}
                   >
                     Valider
                   </button>
