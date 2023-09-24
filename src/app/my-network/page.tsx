@@ -7,14 +7,13 @@ import {fetchFriendProduct} from '@/redux/features/productSlice'
 import {useSelector} from "react-redux";
 import setProductCardInfo from "@/services/setProductCardInfo";
 import Modal from "@/components/product/Modal";
-import {setLazyProp} from "next/dist/server/api-utils";
+
 import {
   useCancelReservationMutation,
   useMakeReservationMutation,
   useReturnReservationMutation
 } from "@/redux/features/productApiSlice";
 import {toast} from "react-toastify";
-import {act} from "react-dom/test-utils";
 
 
 export default function MyNetwork() {
