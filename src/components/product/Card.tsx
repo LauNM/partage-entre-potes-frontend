@@ -1,6 +1,7 @@
 import {Tag} from "@/components/common";
 import {AiOutlineMenu} from "react-icons/ai";
 import Button from "@/components/common/Button";
+import Image from "next/image";
 
 interface Props {
   product: {
@@ -36,8 +37,9 @@ export default function Card({product, action}: Props) {
 
   return (
     <div className="product-card rounded-lg bg-grey-light text-base shadow-lg relative">
-      <div className="card-content bg-cover bg-center rounded-t-lg h-36" style={{backgroundImage: `url(${product.image})`}}>
-        <div style={{background: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4))'}} className="rounded-t-lg p-2 h-36 flex flex-col justify-between">
+      <div className="card-content relative bg-cover bg-center rounded-t-lg h-36">
+        {product.image ? <Image src={product.image} alt={product.name} fill={true} objectFit={"cover"} className={"rounded-t-lg"} /> : null}
+        <div style={{background: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4))'}} className="relative rounded-t-lg z-50 p-2 h-36 flex flex-col justify-between">
           <div className="text-white">
             <div className="content-header flex justify-between">
               <Tag status={product.status} />
