@@ -7,6 +7,7 @@ import {fetchFriendProduct} from '@/redux/features/productSlice'
 import {useSelector} from "react-redux";
 import productCard from "@/services/productCard";
 import Modal from "@/components/product/Modal";
+import Button from "@/components/common/Button";
 
 
 export default function MyNetwork() {
@@ -35,7 +36,12 @@ export default function MyNetwork() {
     return (<div><p>Loading...</p></div>)
   }
   if(!friendProduct.loading && !friendProduct.friend_product.length) {
-    return (<div><p>Pas de résultat</p></div>)
+    return (
+        <div className="flex flex-col justify-center items-center gap-6" style={{height: '90vh'}}>
+          <p>Aucun produit trouvé</p>
+          <Button text={"Ajouter un nouvel ami"} type={"primary"} />
+        </div>
+    )
   }
 
   return (

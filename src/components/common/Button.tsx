@@ -13,7 +13,7 @@ const style: object = {
     },
     primary: {
         background: 'bg-primary',
-        color: 'text-primary-light'
+        color: 'text-white'
     }
 }
 
