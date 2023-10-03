@@ -1,10 +1,9 @@
 'use client';
 import React, {useEffect, useState} from "react";
 import Card from "@/components/product/Card";
-import {useAppDispatch} from "@/redux/hooks";
 import {fetchUser} from '@/redux/features/userSlice'
 import {fetchFriendProduct} from '@/redux/features/productSlice'
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import productCard from "@/services/productCard";
 import Modal from "@/components/product/Modal";
 import Button from "@/components/common/Button";
@@ -14,7 +13,7 @@ import Link from "next/link";
 export default function MyNetwork() {
   // @ts-ignore
   const friendProduct = useSelector((state) => state.friendProduct)
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch<any>();
   // @ts-ignore
   const user_connected_id = useSelector((state) => state.user.user.id);
   let [openModal, setOpenModal] = useState(false);
