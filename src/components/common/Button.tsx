@@ -5,20 +5,12 @@ interface Props {
     text: string;
     onClick?: MouseEventHandler;
 }
-
 const style: object = {
-    default: {
-        background: 'bg-button-light',
-        color: 'text-button'
-    },
-    primary: {
-        background: 'bg-primary',
-        color: 'text-white'
-    }
+    default: 'bg-button-light text-button',
+    primary: 'bg-primary text-white',
+    'outlined-primary': 'bg-white text-primary ring-1 ring-primary'
 }
 
 export default function Button({ type, text, onClick }: Props) {
-    // @ts-ignore
-    const {background, color } = style[type || 'default'];
-    return <button onClick={onClick} className={`rounded-lg px-4 py-1 ${background} ${color}`}>{text}</button>
+    return <button onClick={onClick} className={`rounded-lg px-4 py-1 ${style[type || 'default']}`}>{text}</button>
 }
