@@ -8,6 +8,7 @@ import productCard from "@/services/productCard";
 import Modal from "@/components/product/Modal";
 import Button from "@/components/common/Button";
 import Link from "next/link";
+import PageHeader from "@/components/common/PageHeader";
 
 
 export default function MyNetwork() {
@@ -49,6 +50,7 @@ export default function MyNetwork() {
 
   return (
     <>
+      <PageHeader />
       <div className="card-wrapper grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-2">
         {friendProduct.friend_product.map((item: any) => {
           const product = productCard(item, user_connected_id);
