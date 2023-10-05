@@ -16,7 +16,7 @@ export default function PageHeader() {
                 <Button
                     text="Mes réservation"
                     onClick={handleClick}
-                    type={buttonSelected ? "outlined-primary" : "primary"}
+                    type={buttonSelected ? "primary" : "outlined-primary"}
                 />
                 <Dropdown />
             </div>
