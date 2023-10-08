@@ -1,5 +1,3 @@
-import {useSelector} from "react-redux";
-
 interface Product {
   id: string;
   name: string;

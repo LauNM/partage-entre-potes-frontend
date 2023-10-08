@@ -1,12 +1,10 @@
 'use client';
 import {RequireAuth} from '@/components/utils';
 
-import type {Metadata} from "next";
 import {Navbar} from "@/components/common";
 import {useEffect} from "react";
 import {fetchUser} from "@/redux/features/userSlice";
-import {fetchFriendProduct} from "@/redux/features/friendProductSlice";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 
 interface Props {
     children: React.ReactNode;

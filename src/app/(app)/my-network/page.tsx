@@ -1,7 +1,6 @@
 'use client';
 import React, {useEffect, useState} from "react";
 import Card from "@/components/product/Card";
-import {fetchUser} from '@/redux/features/userSlice'
 import {fetchFriendProduct} from '@/redux/features/friendProductSlice'
 import {useDispatch, useSelector} from "react-redux";
 import productCard from "@/services/productCard";

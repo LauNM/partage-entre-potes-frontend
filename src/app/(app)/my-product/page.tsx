@@ -1,13 +1,10 @@
 'use client';
 import React, {useEffect, useState} from "react";
 import Card from "@/components/product/Card";
-import {fetchUser} from '@/redux/features/userSlice'
 import {fetchProduct} from '@/redux/features/productSlice'
 import {useDispatch, useSelector} from "react-redux";
 import productCard from "@/services/productCard";
 import Modal from "@/components/product/Modal";
-import Button from "@/components/common/Button";
-import Link from "next/link";
 import PageHeader from "@/components/common/PageHeader";
 export default function MyProduct() {
     // @ts-ignore
