@@ -22,7 +22,6 @@ export default function RootLayout({
       <body className={inter.className}>
         <Provider>
           <Setup />
-          <Navbar />
           {children}
         </Provider>
       </body>
