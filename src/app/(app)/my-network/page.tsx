@@ -2,7 +2,7 @@
 import React, {useEffect, useState} from "react";
 import Card from "@/components/product/Card";
 import {fetchUser} from '@/redux/features/userSlice'
-import {fetchFriendProduct} from '@/redux/features/productSlice'
+import {fetchFriendProduct} from '@/redux/features/friendProductSlice'
 import {useDispatch, useSelector} from "react-redux";
 import productCard from "@/services/productCard";
 import Modal from "@/components/product/Modal";
@@ -28,7 +28,6 @@ export default function MyNetwork() {
   useEffect(() => {
 
     if(friendProduct.friend_product === null) {
-      dispatch(fetchUser())
       dispatch(fetchFriendProduct())
     }
   }, [dispatch, friendProduct.friend_product]);
@@ -50,7 +49,9 @@ export default function MyNetwork() {
 
   return (
     <>
-      <PageHeader />
+        <PageHeader>
+            <p>Mon réseau</p>
+        </PageHeader>
       <div className="card-wrapper grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-2">
         {friendProduct.friend_product.map((item: any) => {
           const product = productCard(item, user_connected_id);

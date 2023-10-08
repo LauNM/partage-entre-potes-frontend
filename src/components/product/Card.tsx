@@ -51,7 +51,7 @@ export default function Card({product, action}: Props) {
           </div>
           <div className="content-footer text-lg text-white">
             <p><span className="font-semibold">Catégorie :</span>  {product.category.name}</p>
-            <p><span className="font-semibold">Propriétaire :</span> {product.owner.surname}</p>
+            <p><span className="font-semibold">Propriétaire :</span> {product.isOwner ? "Moi" : product.owner.surname}</p>
           </div>
         </div>
       </div>

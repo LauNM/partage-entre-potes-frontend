@@ -1,3 +1,5 @@
+import {useSelector} from "react-redux";
+
 interface Product {
   id: string;
   name: string;
@@ -26,9 +28,9 @@ const status = {
   borrowed: "Borrowed"
 }
 
-export default function productCard(product: Product, userConnectedId: string) {
+export default function productCard(product: Product, userConnectedId: String) {
 
-  const isOwner = userConnectedId === product.owner.id;
+  const isOwner = !product?.owner;
   let showButton = false;
   let buttonText = '';
   let disabled = true;
@@ -41,7 +43,7 @@ export default function productCard(product: Product, userConnectedId: string) {
   }
 
   if (product.status === status.available
-    && product.owner.id !== userConnectedId) {
+    && !isOwner) {
     setButtonActive();
     buttonText = "Je réserve";
     popupText = "Vous êtes sur le point de réserver cet article.";

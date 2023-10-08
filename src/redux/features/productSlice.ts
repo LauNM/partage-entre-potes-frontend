@@ -3,51 +3,52 @@ import {store} from "@/redux/store";
 import axios from 'axios';
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
 
-interface FriendProduct {
+interface Product {
     loading: boolean;
-    friend_product: any[],
+    data: any[],
 }
 
 const initialState = {
     loading: true,
-    friend_product: null,
+    data: null,
 }
 
-export const fetchFriendProduct = createAsyncThunk('friend/fetchProduct', async () => {
+export const fetchProduct = createAsyncThunk('fetchProduct', async () => {
     const token = store.getState().auth.userToken;
     const response = await axios
-      .get(`${process.env.NEXT_PUBLIC_HOST}/api/friend/product/`, {
-          headers: {
-              'Authorization': `Bearer ${token}`,
-              'Content-Type': 'application/json'
-          }
-      });
-    return setFriendProduct(response.data.results);
+        .get(`${process.env.NEXT_PUBLIC_HOST}/api/product/`, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        });
+    return setProduct(response.data.results);
 
 })
+
 const productSlice = createSlice({
-    name: 'friend_product',
+    name: 'product',
     initialState,
     reducers: {
-        setFriendProduct: (state, action) => {
-            state.friend_product = action.payload;
+        setProduct: (state, action) => {
+            state.data = action.payload;
         }
     },
     extraReducers: (builder) => {
-        builder.addCase(fetchFriendProduct.pending, (state) => {
+        builder.addCase(fetchProduct.pending, (state) => {
             state.loading = true
         })
-        builder.addCase(fetchFriendProduct.fulfilled, (state, action) => {
+        builder.addCase(fetchProduct.fulfilled, (state, action) => {
             state.loading = false
-            state.friend_product = action.payload.payload
+            state.data = action.payload.payload
         })
-        builder.addCase(fetchFriendProduct.rejected, (state, action) => {
+        builder.addCase(fetchProduct.rejected, (state, action) => {
             state.loading = false
-            state.friend_product = null
+            state.data = null
         })
     }
 })
 
-export const { setFriendProduct } = productSlice.actions;
+export const { setProduct } = productSlice.actions;
 
 export default productSlice.reducer
