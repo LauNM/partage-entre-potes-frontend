@@ -40,12 +40,15 @@ export default function productCard(product: Product, userConnectedId: String) {
     disabled = false;
   }
 
-  if (product.status === status.available
-    && !isOwner) {
-    setButtonActive();
-    buttonText = "Je réserve";
-    popupText = "Vous êtes sur le point de réserver cet article.";
-
+  if (product.status === status.available) {
+    if (isOwner) {
+      disabled = false;
+    }
+    else {
+      setButtonActive();
+      buttonText = "Je réserve";
+      popupText = "Vous êtes sur le point de réserver cet article.";
+    }
   }
   if (product.status === status.booked) {
     if (isOwner) {

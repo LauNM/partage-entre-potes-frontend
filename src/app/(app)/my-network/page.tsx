@@ -48,10 +48,10 @@ export default function MyNetwork() {
 
   return (
     <>
-        <PageHeader>
+        <PageHeader hasMyProductButton={true}>
             <p>Mon réseau</p>
         </PageHeader>
-      <div className="card-wrapper grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-2">
+      <div className="card-wrapper grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 py-2">
         {friendProduct.friend_product.map((item: any) => {
           const product = productCard(item, user_connected_id);
           return <Card key={item.id} product={product} action={action}/>

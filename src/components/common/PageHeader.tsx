@@ -4,7 +4,7 @@ import Button from "@/components/common/Button";
 import { useState } from "react";
 
 
-export default function PageHeader({children}) {
+export default function PageHeader({children, hasMyProductButton}) {
     const [buttonSelected, setButtonSelected] = useState(false);
     const handleClick = () => {
         setButtonSelected((prev) => !prev);
@@ -13,14 +13,14 @@ export default function PageHeader({children}) {
     return (
         <>
             {children}
-            <div className="w-screen p-3 flex flex-col md:flex-row-reverse justify-between gap-2">
+            <div className="w-full py-3 flex flex-col md:flex-row-reverse justify-between gap-3">
                 <SearchInput />
                 <div className="flex md:flex-row sm:gap-5 justify-between text-base">
-                    <Button
+                    { hasMyProductButton ? <Button
                         text="Mes réservation"
                         onClick={handleClick}
                         type={buttonSelected ? "primary" : "outlined-primary"}
-                    />
+                    /> : <span />}
                     <Dropdown />
                 </div>
             </div>

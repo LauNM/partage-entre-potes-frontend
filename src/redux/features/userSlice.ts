@@ -29,6 +29,7 @@ export const fetchUser = createAsyncThunk('user/fetchUser', async () => {
               'Content-Type': 'application/json'
           }
       });
+    console.log(response.data.results)
     return setUser(response.data.results[0]);
 })
 

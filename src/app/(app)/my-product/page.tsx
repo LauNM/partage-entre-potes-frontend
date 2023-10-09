@@ -47,7 +47,7 @@ export default function MyProduct() {
             <PageHeader>
                 <p>Mes produits</p>
             </PageHeader>
-            <div className="card-wrapper grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-2">
+            <div className="card-wrapper grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 py-2">
                 {product.data.map((item: any) => {
                     const product = productCard(item, user_connected_id);
                     return <Card key={item.id} product={product} action={action}/>

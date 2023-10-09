@@ -13,7 +13,7 @@ const initialState = {
     friend_product: null,
 }
 
-export const fetchFriendProduct = createAsyncThunk('friend/fetchProduct', async () => {
+export const fetchFriendProduct = createAsyncThunk('fetchFriendProduct', async () => {
     const token = store.getState().auth.userToken;
     const response = await axios
         .get(`${process.env.NEXT_PUBLIC_HOST}/api/friend/product/`, {
