@@ -6,6 +6,7 @@ import {useDispatch, useSelector} from "react-redux";
 import productCard from "@/services/productCard";
 import Modal from "@/components/product/Modal";
 import PageHeader from "@/components/common/PageHeader";
+import Button from "@/components/common/Button";
 export default function MyProduct() {
     // @ts-ignore
     const product = useSelector((state) => state.product)
@@ -32,12 +33,9 @@ export default function MyProduct() {
     }
     if(!product.loading && !product.data.length) {
         return (
-            <div className="flex flex-col justify-center items-center gap-6" style={{height: '90vh'}}>
+            <div className="flex flex-col justify-center items-center gap-6" style={{height: '80vh'}}>
                 <p>Aucun produit trouvé</p>
-                {/*<Link href="/profile">
-                    <Button text={"Ajouter un nouvel ami"} type={"primary"} />
-                </Link>*/}
-
+                <Button text={"Ajouter un produit"} type={"primary"} />
             </div>
         )
     }
