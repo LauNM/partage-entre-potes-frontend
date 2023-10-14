@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { apiSlice } from './services/apiSlice';
-import friendProductReducer from './features/productSlice';
+import productReducer from './features/productSlice';
+import friendProductReducer from './features/friendProductSlice';
 import authReducer from './features/authSlice';
 import userReducer from './features/userSlice'
 
@@ -9,6 +10,7 @@ export const store = configureStore({
     [apiSlice.reducerPath]: apiSlice.reducer,
     auth: authReducer,
     friendProduct: friendProductReducer,
+    product: productReducer,
     user: userReducer,
   },
   middleware: getDefaultMiddleware =>
