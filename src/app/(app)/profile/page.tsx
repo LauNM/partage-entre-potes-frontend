@@ -4,6 +4,9 @@ import {useEffect, useState} from "react";
 import {store} from "@/redux/store";
 import axios from "axios";
 import {InfoCard} from "@/components/common";
+import {useSelector} from "react-redux";
+import moment from "moment";
+import 'moment/locale/fr'
 
 const token = store.getState().auth.userToken;
 
@@ -21,6 +24,10 @@ async function fetchSummary() {
 export default function Profile() {
     const [data, setData] = useState(null)
     const [isLoading, setLoading] = useState(true)
+    const user = useSelector((state) => state.user.user);
+
+    const date = moment(user.date_joined);
+    const joined_date = date.locale('fr').format('LL');
 
     useEffect(() => {
         fetchSummary()
@@ -33,9 +40,14 @@ export default function Profile() {
     if (isLoading) return <p>Loading...</p>
     if (!data) return <p>No profile data</p>
 
+
     return (
         <>
-            <p>Profil</p>
+            <header className="my-4 text-blue">
+                <p className="font-semibold text-2xl mb-1">{ user.surname }</p>
+                <p className="text-base">Membre depuis le { joined_date }</p>
+            </header>
+
             <div className="grid md:grid-cols-3 grid-cols-2 gap-4 py-2 text-center">
                 <div>
                     <InfoCard type={'blue'}>
