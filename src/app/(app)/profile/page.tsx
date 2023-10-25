@@ -7,6 +7,10 @@ import {InfoCard} from "@/components/common";
 import {useSelector} from "react-redux";
 import moment from "moment";
 import 'moment/locale/fr'
+import Link from "next/link";
+import { HiOutlineBriefcase } from "react-icons/hi"
+import { RiUserHeartLine, RiUserAddLine } from "react-icons/ri"
+import { FiLogOut } from "react-icons/fi"
 
 const token = store.getState().auth.userToken;
 
@@ -66,6 +70,33 @@ export default function Profile() {
                         <p>{data.total_friends_products}</p>
                         <p>Produits à emprunter</p>
                     </InfoCard>
+                </div>
+            </div>
+
+            <div className="text-blue text-xl mt-5 font-semibold">
+                <div>
+                    <Link href="/" className="flex flex-row gap-2 items-center mb-5">
+                        <HiOutlineBriefcase />
+                        Mes produits
+                    </Link>
+                </div>
+                <div>
+                    <Link href="/" className="flex flex-row gap-2 items-center mb-5">
+                        <RiUserHeartLine />
+                        Mes amis
+                    </Link>
+                </div>
+                <div>
+                    <Link href="/" className="flex flex-row gap-2 items-center mb-5">
+                        <RiUserAddLine />
+                        Ajouter un ami
+                    </Link>
+                </div>
+                <div>
+                    <Link href="/" className="flex flex-row gap-2 items-center mb-1">
+                        <FiLogOut />
+                        Se déconnecter
+                    </Link>
                 </div>
             </div>
         </>
