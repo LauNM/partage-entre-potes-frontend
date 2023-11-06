@@ -52,7 +52,7 @@ export default function AccountPage() {
                 <p className="text-base">Membre depuis le { joined_date }</p>
             </header>
 
-            <div className="grid md:grid-cols-3 grid-cols-2 gap-4 py-2 text-center">
+            <div className="grid grid-cols-2 gap-4 py-2 text-center">
                 <div>
                     <InfoCard type={'blue'}>
                         <p>{data.total_friends}</p>
@@ -65,7 +65,7 @@ export default function AccountPage() {
                         <p>produits</p>
                     </InfoCard>
                 </div>
-                <div className="md:col-span-1 col-span-2">
+                <div className="col-span-2">
                     <InfoCard type={'red'}>
                         <p>{data.total_friends_products}</p>
                         <p>Produits à emprunter</p>

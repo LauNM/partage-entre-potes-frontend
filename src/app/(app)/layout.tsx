@@ -20,7 +20,7 @@ export default function Layout({children}: Props) {
     return (
         <RequireAuth>
             <Navbar/>
-            <div>
+            <div style={{height: 'calc(100vh - 64px)'}}>
                 {children}
             </div>
         </RequireAuth>

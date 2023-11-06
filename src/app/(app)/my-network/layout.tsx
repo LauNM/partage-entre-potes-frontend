@@ -11,5 +11,5 @@ export const metadata: Metadata = {
 };
 
 export default function Layout({ children }: Props) {
-  return <RequireAuth>{children}</RequireAuth>;
+  return <div className="p-3"><RequireAuth>{children}</RequireAuth></div>;
 }

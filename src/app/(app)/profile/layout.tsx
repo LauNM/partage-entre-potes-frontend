@@ -1,23 +1,28 @@
-import { RequireAuth } from '@/components/utils';
+import {RequireAuth} from '@/components/utils';
 
-import type { Metadata } from "next";
+import type {Metadata} from "next";
 import AccountPage from "@/components/account/AccountPage";
+
 interface Props {
-  children: React.ReactNode;
+    children: React.ReactNode;
 }
 
 export const metadata: Metadata = {
-  title: 'Mon profil',
-  description: "Page de mon profil"
+    title: 'Mon profil',
+    description: "Page de mon profil"
 };
 
-export default function Layout({ children }: Props) {
-  return (
-  <div style={{display: 'flex', height: 'calc(100vh - 64px)'}}>
-    <RequireAuth>
-      <div style={{width: '50%'}}><AccountPage /></div>
-      <div style={{width: '50%'}}> {children}</div>
-    </RequireAuth>
-  </div>
-  );
+export default function Layout({children}: Props) {
+    return (
+        <RequireAuth>
+            <div className="grid grid-cols-2 h-full">
+                <div className="p-3"><AccountPage/></div>
+                <div className=" bg-grey-light">
+                    <div className="box-border p-3 w-full h-full">
+                        {children}
+                    </div>
+                </div>
+            </div>
+        </RequireAuth>
+    );
 }
