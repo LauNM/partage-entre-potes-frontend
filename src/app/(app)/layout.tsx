@@ -20,7 +20,7 @@ export default function Layout({children}: Props) {
     return (
         <RequireAuth>
             <Navbar/>
-            <div className="p-4">
+            <div>
                 {children}
             </div>
         </RequireAuth>

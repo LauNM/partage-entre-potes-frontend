@@ -25,7 +25,7 @@ async function fetchSummary() {
     return response.data
 }
 
-export default function Profile() {
+export default function AccountPage() {
     const [data, setData] = useState(null)
     const [isLoading, setLoading] = useState(true)
     const user = useSelector((state) => state.user.user);
@@ -75,13 +75,13 @@ export default function Profile() {
 
             <div className="text-blue text-xl mt-5 font-semibold">
                 <div>
-                    <Link href="/" className="flex flex-row gap-2 items-center mb-5">
+                    <Link href="/profile/my-product" className="flex flex-row gap-2 items-center mb-5">
                         <HiOutlineBriefcase />
                         Mes produits
                     </Link>
                 </div>
                 <div>
-                    <Link href="/" className="flex flex-row gap-2 items-center mb-5">
+                    <Link href="/profile" className="flex flex-row gap-2 items-center mb-5">
                         <RiUserHeartLine />
                         Mes amis
                     </Link>
