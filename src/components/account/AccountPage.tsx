@@ -8,9 +8,9 @@ import {useSelector} from "react-redux";
 import moment from "moment";
 import 'moment/locale/fr'
 import Link from "next/link";
-import { HiOutlineBriefcase } from "react-icons/hi"
-import { RiUserHeartLine, RiUserAddLine } from "react-icons/ri"
-import { FiLogOut } from "react-icons/fi"
+import {HiOutlineBriefcase} from "react-icons/hi"
+import {RiUserHeartLine, RiUserAddLine} from "react-icons/ri"
+import {FiLogOut} from "react-icons/fi"
 
 const token = store.getState().auth.userToken;
 
@@ -48,8 +48,8 @@ export default function AccountPage() {
     return (
         <>
             <header className="my-4 text-blue">
-                <p className="font-semibold text-2xl mb-1">{ user.surname }</p>
-                <p className="text-base">Membre depuis le { joined_date }</p>
+                <p className="font-semibold text-2xl mb-1">{user.surname}</p>
+                <p className="text-base">Membre depuis le {joined_date}</p>
             </header>
 
             <div className="grid grid-cols-2 gap-4 py-2 text-center">
@@ -76,25 +76,25 @@ export default function AccountPage() {
             <div className="text-blue text-xl mt-5 font-semibold">
                 <div>
                     <Link href="/profile/my-product" className="flex flex-row gap-2 items-center mb-5">
-                        <HiOutlineBriefcase />
+                        <HiOutlineBriefcase/>
                         Mes produits
                     </Link>
                 </div>
                 <div>
-                    <Link href="/profile" className="flex flex-row gap-2 items-center mb-5">
-                        <RiUserHeartLine />
+                    <Link href="/profile/friends" className="flex flex-row gap-2 items-center mb-5">
+                        <RiUserHeartLine/>
                         Mes amis
                     </Link>
                 </div>
                 <div>
-                    <Link href="/" className="flex flex-row gap-2 items-center mb-5">
-                        <RiUserAddLine />
+                    <Link href="/profile/add-friend" className="flex flex-row gap-2 items-center mb-5">
+                        <RiUserAddLine/>
                         Ajouter un ami
                     </Link>
                 </div>
                 <div>
-                    <Link href="/" className="flex flex-row gap-2 items-center mb-1">
-                        <FiLogOut />
+                    <Link href="/auth/login" className="flex flex-row gap-2 items-center mb-1">
+                        <FiLogOut/>
                         Se déconnecter
                     </Link>
                 </div>

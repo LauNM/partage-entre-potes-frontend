@@ -30,14 +30,15 @@ export default function MyProduct() {
     }, [dispatch, product.data]);
 
     if (product.loading) {
-        return (<div className="flex flex-col justify-center items-center gap-6 bg-white"><p>Loading...</p></div>)
+        return (
+            <div className="flex flex-col justify-center items-center gap-6 bg-white h-full"><p>Loading...</p></div>)
     }
     if (!product.loading && !product.data.length) {
         return (
-                <div className="flex flex-col justify-center items-center gap-6 bg-white h-full">
-                    <p>Aucun produit trouvé</p>
-                    <Button text={"Ajouter un produit"} type={"primary"}/>
-                </div>
+            <div className="flex flex-col justify-center items-center gap-6 bg-white h-full">
+                <p>Aucun produit trouvé</p>
+                <Button text={"Ajouter un produit"} type={"primary"}/>
+            </div>
         )
     }
 
