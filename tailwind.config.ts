@@ -1,21 +1,18 @@
-import type { Config } from 'tailwindcss'
-import {undefined} from "zod";
 import plugin from "@tailwindcss/forms";
 
 const config: {
-  // @ts-ignore
   plugins: (plugin | ((options?: Partial<{ strategy: "base" | "class" }>) => { handler: () => void }))[];
   theme: {
     extend: { backgroundImage: { "gradient-conic": string; "gradient-radial": string } };
-    fontSize: { xl: string[]; sm: string[]; lg: string[]; base: string[] };
+    fontSize: { xl: string[]; "2xl": string[]; sm: string[]; lg: string[]; base: string[] };
     colors: {
       red: { light: string; DEFAULT: string };
+      button: { light: string; DEFAULT: string };
       green: { hover: string; light: string; DEFAULT: string };
       white: string;
       blue: { hover: string; light: string; DEFAULT: string };
       primary: { light: string; dark: string; DEFAULT: string };
-      grey: { light: string; DEFAULT: string };
-      button: { light: string; DEFAULT: string };
+      grey: { light: string; DEFAULT: string }
     }
   };
   content: string[]
@@ -38,6 +35,7 @@ const config: {
       base: ['12px', '18px'],
       lg: ['14px', '20px'],
       xl: ['16px', '24px'],
+      '2xl': ['24px', '32px'],
     },
     colors: {
       white: '#FFF',

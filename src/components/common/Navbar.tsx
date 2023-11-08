@@ -60,11 +60,6 @@ export default function Navbar() {
                                     </NavLink>
                                 </div>
                                 <div className='hidden sm:ml-6 sm:block'>
-                                    <NavLink href='/my-product' isBanner>
-                                        Mes produits
-                                    </NavLink>
-                                </div>
-                                <div className='hidden sm:ml-6 sm:block'>
                                     <NavLink href='/notifications' isBanner>
                                         Notifications
                                     </NavLink>
