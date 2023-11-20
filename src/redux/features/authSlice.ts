@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 
 interface AuthState {
@@ -29,9 +29,9 @@ const authSlice = createSlice({
     },
     finishInitialLoad: state => {
       state.isLoading = false;
-    }
-  }
-})
+    },
+  },
+});
 
-export const { setAuth, logout, finishInitialLoad  } = authSlice.actions;
+export const { setAuth, logout, finishInitialLoad } = authSlice.actions;
 export default authSlice.reducer;

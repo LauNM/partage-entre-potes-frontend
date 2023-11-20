@@ -3,7 +3,7 @@ import { apiSlice } from './services/apiSlice';
 import productReducer from './features/productSlice';
 import friendProductReducer from './features/friendProductSlice';
 import authReducer from './features/authSlice';
-import userReducer from './features/userSlice'
+import userReducer from './features/userSlice';
 
 export const store = configureStore({
   reducer: {
@@ -14,7 +14,7 @@ export const store = configureStore({
     user: userReducer,
   },
   middleware: getDefaultMiddleware =>
-      getDefaultMiddleware().concat(apiSlice.middleware),
+    getDefaultMiddleware().concat(apiSlice.middleware),
   devTools: process.env.NODE_ENV !== 'production',
 });
 

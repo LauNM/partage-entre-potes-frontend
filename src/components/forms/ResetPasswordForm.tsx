@@ -1,14 +1,14 @@
 'use client';
 
 import { Form } from '@/components/forms';
-import { useResetPassword } from "@/hooks";
+import { useResetPassword } from '@/hooks';
 
-export default function ResetPasswordForm(){
+export default function ResetPasswordForm() {
   const {
     email,
     isLoading,
     onChange,
-    onSubmit
+    onSubmit,
   } = useResetPassword();
 
   const config = [
@@ -17,16 +17,16 @@ export default function ResetPasswordForm(){
       labelId: 'email',
       type: 'email',
       value: email,
-      required: true
-    }
+      required: true,
+    },
   ];
 
   return (
     <Form
-      config={config}
-      isLoading={isLoading}
-      buttonText={'Envoyer'}
-      onChange={onChange}
-      onSubmit={onSubmit} />
-  )
+      config={ config }
+      isLoading={ isLoading }
+      buttonText={ 'Envoyer' }
+      onChange={ onChange }
+      onSubmit={ onSubmit } />
+  );
 }

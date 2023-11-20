@@ -1,6 +1,6 @@
 'use client';
 
-import { useRegister } from "@/hooks";
+import { useRegister } from '@/hooks';
 import { Form } from '@/components/forms';
 
 export default function RegisterForm() {
@@ -13,7 +13,7 @@ export default function RegisterForm() {
     password2,
     isLoading,
     onChange,
-    onSubmit
+    onSubmit,
   } = useRegister();
 
   const config = [
@@ -21,52 +21,52 @@ export default function RegisterForm() {
       labelText: 'Pseudo',
       labelId: 'surname',
       type: 'text',
-      value: surname
+      value: surname,
     },
     {
       labelText: 'Prénom',
       labelId: 'first_name',
       type: 'text',
       value: first_name,
-      required: true
+      required: true,
     },
     {
       labelText: 'Nom',
       labelId: 'last_name',
       type: 'text',
       value: last_name,
-      required: true
+      required: true,
     },
     {
       labelText: 'Email',
       labelId: 'email',
       type: 'email',
       value: email,
-      required: true
+      required: true,
     },
     {
       labelText: 'Mot de passe',
       labelId: 'password',
       type: 'password',
       value: password,
-      required: true
+      required: true,
     },
     {
       labelText: 'Confirmation du mot de passe',
       labelId: 'password2',
       type: 'password',
       value: password2,
-      required: true
-    }
+      required: true,
+    },
   ];
 
   return (
     <Form
-      config={config}
-      isLoading={isLoading}
-      buttonText={'Valider'}
-      cancelRedirection={'/auth/login'}
-      onChange={onChange}
-      onSubmit={onSubmit} />
-  )
+      config={ config }
+      isLoading={ isLoading }
+      buttonText={ 'Valider' }
+      cancelRedirection={ '/auth/login' }
+      onChange={ onChange }
+      onSubmit={ onSubmit } />
+  );
 }

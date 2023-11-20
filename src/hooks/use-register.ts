@@ -1,11 +1,11 @@
-import {useRouter} from "next/navigation";
-import {useRegisterMutation} from "@/redux/features/authApiSlice";
-import {ChangeEvent, FormEvent, useState} from "react";
-import {toast} from "react-toastify";
+import { useRouter } from 'next/navigation';
+import { useRegisterMutation } from '@/redux/features/authApiSlice';
+import { ChangeEvent, FormEvent, useState } from 'react';
+import { toast } from 'react-toastify';
 
 export default function useRegister() {
   const router = useRouter();
-  const [register, {isLoading}] = useRegisterMutation();
+  const [register, { isLoading }] = useRegisterMutation();
 
   const [formData, setFormData] = useState({
     first_name: '',
@@ -16,14 +16,14 @@ export default function useRegister() {
     password2: '',
   });
 
-  const {first_name, last_name, surname, email, password, password2} = formData;
+  const { first_name, last_name, surname, email, password, password2 } = formData;
 
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
 
-    const {name, value} = event.target;
+    const { name, value } = event.target;
 
-    setFormData({...formData, [name]: value})
-  }
+    setFormData({ ...formData, [name]: value });
+  };
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -34,7 +34,7 @@ export default function useRegister() {
       email,
       password,
       password2,
-      ...(surname !== "" && { surname }),
+      ...(surname !== '' && { surname }),
     } as { [key: string]: string };
 
     register(body)
@@ -45,7 +45,7 @@ export default function useRegister() {
       })
       .catch(() => {
         toast.error('Une erreur est survenue');
-      })
+      });
   };
 
   return {
@@ -57,6 +57,6 @@ export default function useRegister() {
     password2,
     isLoading,
     onChange,
-    onSubmit
-  }
+    onSubmit,
+  };
 }
