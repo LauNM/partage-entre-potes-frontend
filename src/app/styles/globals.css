@@ -4,15 +4,8 @@
 
 .card-wrapper {
 }
-.product-card {
-    .card-content {
-        .content-header {
-        }
-        .content-footer {}
-    }
-    .card-footer {
-        .card-button {
-            background: cadetblue;
-        }
-    }
+
+.card-button {
+    background: cadetblue;
 }
+

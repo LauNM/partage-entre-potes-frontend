@@ -1,10 +1,12 @@
-import plugin from "@tailwindcss/forms";
+import plugin from '@tailwindcss/forms';
+
+const { nextui } = require('@nextui-org/react');
 
 const config: {
-  plugins: (plugin | ((options?: Partial<{ strategy: "base" | "class" }>) => { handler: () => void }))[];
+  plugins: (plugin | ((options?: Partial<{ strategy: 'base' | 'class' }>) => { handler: () => void }))[];
   theme: {
-    extend: { backgroundImage: { "gradient-conic": string; "gradient-radial": string } };
-    fontSize: { xl: string[]; "2xl": string[]; sm: string[]; lg: string[]; base: string[] };
+    extend: { backgroundImage: { 'gradient-conic': string; 'gradient-radial': string } };
+    fontSize: { xl: string[]; '2xl': string[]; sm: string[]; lg: string[]; base: string[] };
     colors: {
       red: { light: string; DEFAULT: string };
       button: { light: string; DEFAULT: string };
@@ -21,6 +23,8 @@ const config: {
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    './node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}',
+
   ],
   theme: {
     extend: {
@@ -42,34 +46,36 @@ const config: {
       primary: {
         light: '#FEEDCD',
         dark: '#4B3102',
-        DEFAULT: '#F9AD1F'
+        DEFAULT: '#F9AD1F',
       },
       red: {
         light: '#F9D2D3',
-        DEFAULT: '#A4161A'
+        DEFAULT: '#A4161A',
       },
       green: {
         light: '#D7F4F5',
         DEFAULT: '#2A9D8F',
-        hover: '#5fc7ba'
+        hover: '#5fc7ba',
       },
       blue: {
         light: '#D2DADE',
         DEFAULT: '#00344D',
-        hover: '#014b73'
+        hover: '#014b73',
       },
       grey: {
         light: '#ECECEC',
-        DEFAULT: '#D8D8D8'
+        DEFAULT: '#D8D8D8',
       },
       button: {
         light: '#B2C2C9',
-        DEFAULT: '#00344D'
+        DEFAULT: '#00344D',
       },
-    }
+    },
   },
+  darkMode: 'class',
   plugins: [
-    require('@tailwindcss/forms')
-  ]
-}
-export default config
+    require('@tailwindcss/forms'),
+    nextui(),
+  ],
+};
+export default config;
