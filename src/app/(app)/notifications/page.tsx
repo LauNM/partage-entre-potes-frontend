@@ -1,12 +1,12 @@
 'use client';
 
 export default function Notifications() {
-    return (
-        <>
-            <p>Notifications</p>
-            <ul>
+  return (
+    <>
+      <p>Notifications</p>
+      <ul>
 
-            </ul>
-        </>
-    )
+      </ul>
+    </>
+  );
 }

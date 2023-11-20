@@ -1,14 +1,14 @@
-import { useResetPasswordMutation} from "@/redux/features/authApiSlice";
-import {ChangeEvent, FormEvent, useState} from "react";
-import {toast} from "react-toastify";
+import { useResetPasswordMutation } from '@/redux/features/authApiSlice';
+import { ChangeEvent, FormEvent, useState } from 'react';
+import { toast } from 'react-toastify';
 
 export default function useResetPassword() {
-  const [resetPassword, {isLoading}] = useResetPasswordMutation();
-  const [email, setEmail] = useState('')
+  const [resetPassword, { isLoading }] = useResetPasswordMutation();
+  const [email, setEmail] = useState('');
 
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
-  }
+  };
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -21,13 +21,13 @@ export default function useResetPassword() {
       })
       .catch(() => {
         toast.error('Une erreur est survenue');
-      })
+      });
   };
 
   return {
     email,
     isLoading,
     onChange,
-    onSubmit
-  }
+    onSubmit,
+  };
 }

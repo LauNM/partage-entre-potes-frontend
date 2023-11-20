@@ -1,45 +1,45 @@
-import { useState, ChangeEvent, FormEvent } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAppDispatch } from '@/redux/hooks';
 import { useLoginMutation } from '@/redux/features/authApiSlice';
 import { setAuth } from '@/redux/features/authSlice';
 import { toast } from 'react-toastify';
-import {setTokenCookie} from "@/services/cookieService";
+import { setTokenCookie } from '@/services/cookieService';
 
 export default function useLogin() {
   const dispatch = useAppDispatch();
   const router = useRouter();
-  const [login, {isLoading}] = useLoginMutation();
+  const [login, { isLoading }] = useLoginMutation();
 
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
 
-  const {email, password} = formData;
+  const { email, password } = formData;
 
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
 
-    const {name, value} = event.target;
+    const { name, value } = event.target;
 
-    setFormData({...formData, [name]: value})
-  }
+    setFormData({ ...formData, [name]: value });
+  };
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    login({email, password})
+    login({ email, password })
       .unwrap()
       .then((res) => {
         const { access } = res;
-        dispatch(setAuth({token: access}));
+        dispatch(setAuth({ token: access }));
         setTokenCookie(access);
 
         router.push('/my-network');
       })
       .catch(() => {
         toast.error('Une erreur est survenue');
-      })
+      });
   };
 
   return {
@@ -47,6 +47,6 @@ export default function useLogin() {
     password,
     isLoading,
     onChange,
-    onSubmit
-  }
+    onSubmit,
+  };
 }
