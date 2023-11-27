@@ -1,7 +1,10 @@
+'use client';
+
 import { ChangeEvent, FormEvent } from 'react';
 import { Input } from '@/components/forms';
 import { Spinner } from '@/components/common';
 import Link from 'next/link';
+import { Button } from '@nextui-org/react';
 
 interface Config {
   labelText: string;
@@ -48,22 +51,24 @@ export default function Form({ config, isLoading, buttonText, cancelRedirection,
       )) }
 
       <div className="flex gap-2">
-        <button
+        <Button
           type="submit"
-          className="flex w-full justify-center rounded-md bg-blue px-3 py-1.5 text-white shadow-sm hover:bg-blue-hover"
+          color="primary"
+          variant="solid"
           disabled={ isLoading }
         >
           { isLoading ? <Spinner sm /> : buttonText }
-        </button>
+        </Button>
+
         { cancelRedirection && (
-          <button
-            type="button"
-            className="flex w-full justify-center rounded-md bg-white px-3 py-1.5 text-blue shadow-sm hover:bg-blue-hover hover:text-white hover:ring-0 ring-1 ring-inset ring-blue"
+          <Button
+            color="primary"
+            variant="flat"
           >
             <Link href={ cancelRedirection }>
               Annuler
             </Link>
-          </button>
+          </Button>
         ) }
       </div>
     </form>
