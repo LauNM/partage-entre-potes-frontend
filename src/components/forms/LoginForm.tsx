@@ -2,6 +2,7 @@
 
 import { Form } from '@/components/forms';
 import { useLogin } from '@/hooks';
+import { MailIcon } from '@nextui-org/shared-icons';
 
 export default function LoginForm() {
   const {
@@ -19,6 +20,7 @@ export default function LoginForm() {
       type: 'email',
       value: email,
       required: true,
+      icon: <MailIcon />,
     },
     {
       labelText: 'Mot de passe',

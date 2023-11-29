@@ -1,8 +1,7 @@
 'use client';
 
 import { ChangeEvent, FormEvent } from 'react';
-import { Input } from '@/components/forms';
-import { Spinner } from '@/components/common';
+import { Input } from '@nextui-org/react';
 import Link from 'next/link';
 import { Button } from '@nextui-org/react';
 
@@ -15,8 +14,7 @@ interface Config {
   link?: {
     linkText: string;
     linkUrl: string;
-  },
-
+  };
 }
 
 interface Props {
@@ -37,17 +35,26 @@ export default function Form({ config, isLoading, buttonText, cancelRedirection,
   return (
     <form className="space-y-6" onSubmit={ onSubmit }>
       { config.map((input) => (
-        <Input
-          key={ input.labelId }
-          labelId={ input.labelId }
-          type={ input.type }
-          onChange={ onChange }
-          required={ input.required }
-          value={ input.value }
-          link={ input.link }
-        >
-          { input.labelText }
-        </Input>
+        <div key={ input.labelId }>
+          <Input
+            name={ input.labelId }
+            type={ input.type }
+            label={ input.labelText }
+            onChange={ onChange }
+            required={ input.required }
+            labelPlacement="outside"
+            placeholder={ input.labelText }
+          />
+          { input.link && (
+            <div className={ 'text-[10px] flex flex-row-reverse' }>
+              <Link href={ input.link.linkUrl } className={ 'text-blue hover:text-blue-hover' }>
+                { input.link.linkText }
+              </Link>
+            </div>
+          ) }
+        </div>
+
+
       )) }
 
       <div className="flex gap-2">
@@ -55,9 +62,9 @@ export default function Form({ config, isLoading, buttonText, cancelRedirection,
           type="submit"
           color="primary"
           variant="solid"
-          disabled={ isLoading }
+          isLoading={ isLoading }
         >
-          { isLoading ? <Spinner sm /> : buttonText }
+          { buttonText }
         </Button>
 
         { cancelRedirection && (

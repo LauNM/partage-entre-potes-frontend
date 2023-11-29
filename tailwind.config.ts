@@ -57,7 +57,6 @@ const config = {
   },
   darkMode: 'class',
   plugins: [
-    require('@tailwindcss/forms'),
     nextui(),
   ],
 };
